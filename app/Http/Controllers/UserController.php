@@ -12,12 +12,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-       $user = User::all();
-       return response()->json($user, 200);
-        //
-    }
+   
+    
+     public function index()
+     {
+         $user = auth()->user(); 
+         if (!$user) {
+             return response()->json(['error' => 'Unauthorized'], 401);
+         }
+         if ($user->role && $user->role->id === 1) {
+             return response()->json(['error' => 'Unauthorized'], 401);
+         }
+         $users = User::all();
+         return response()->json($users, 200);
+     }
 
     /**
      * Store a newly created resource in storage.

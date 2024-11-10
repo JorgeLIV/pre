@@ -17,13 +17,13 @@ class UserController extends Controller
      public function index()
      {
          $user = auth()->user(); 
-         if (!$user) {
+        /* if (!$user) {
              return response()->json(['error' => 'Unauthorized'], 401);
          }
          if ($user->role && $user->role->id === 1) {
              return response()->json(['error' => 'Unauthorized'], 401);
-         }
-         $users = User::all();
+         }*/
+       $users = User::all();
          return response()->json($users, 200);
      }
 
@@ -35,6 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+           
         //
     }
 

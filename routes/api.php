@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\UserController;
 use App\Mail\Email;
 use Illuminate\Support\Facades\Mail;
-
+use App\Http\Controllers\ArchivoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\SubirImagen;
+
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
+Route::post('/subir-imagen', [SubirImagen::class, 'subirImagen']);
 //protejo individual
 //Route::get('users', [UserController::class, 'index'])->middleware('jwt.verify');
 

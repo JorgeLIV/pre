@@ -15,6 +15,26 @@ use App\Mail\Email;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\ImagenController;
+
+Route::get('/ver-imagen/{nombreImagen}', function ($nombreImagen) {
+    // La URL base de tu DigitalOcean Space
+    $urlBase = env('AWS_URL');  // Esto obtiene la URL configurada en el archivo .env
+
+    // Concatenamos la ruta de la imagen con el nombre de la imagen
+    $urlImagen = $urlBase . '/' . $nombreImagen;
+
+    // Retornamos la URL de la imagen
+    return redirect()->to($urlImagen);
+});
+
+// Ruta para mostrar el formulario
+Route::get('/subir-imagen', function () {
+    return view('subir-imagen');
+});
+
+// Ruta para manejar el formulario y subir la imagen
+Route::post('/subir-imagen', [ImagenController::class, 'subirImagen']);
 
 Route::get('/', function () {
     return view('welcome');

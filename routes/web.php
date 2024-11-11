@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Mail\Email;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/activate', function() {
+    Mail::to('jorgeibarravilla3@gmail.com')
+        ->send(new Email());
+    return 'Email was sent';
+})->name('activate');
+
+

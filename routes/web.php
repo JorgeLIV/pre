@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Mail\Email;
+use App\Jobs\EnviarCorreoBienvenida;
+use App\Models\User;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +51,14 @@ Route::get('/activate', function() {
 })->name('activate');
 
 
+Route::get('/activate', function () {
+    // Aquí debes proporcionar los datos del usuario (esto es solo un ejemplo)
+    // Deberías crear un usuario o pasar uno que ya exista
+    $usuario = User::find(1); // Asegúrate de tener un usuario válido
+
+    // Despachar el job para enviar el correo con un retraso de 3 minutos
+    EnviarCorreoBienvenida::dispatch($usuario)
+        ->delay(Carbon::now()->addMinutes(3)); // Retrasar el envío del correo 3 minutos
+
+    return 'El correo será enviado en 3 minutos';
+})->name('activate');
